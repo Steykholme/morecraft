@@ -1367,17 +1367,17 @@
             opacity: 0.5;
         }
 
-        /* Google Auth Button */
-        .google-auth-btn {
+        /* Discord Auth Button */
+        .discord-auth-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             width: 100%;
             padding: 15px;
-            background: white;
-            color: #757575;
-            border: 2px solid #e0e0e0;
+            background: #5865F2;
+            color: white;
+            border: none;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
@@ -1385,13 +1385,13 @@
             margin-bottom: 15px;
         }
 
-        .google-auth-btn:hover {
-            background: #f8f9fa;
+        .discord-auth-btn:hover {
+            background: #4752c4;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
         }
 
-        .google-icon {
+        .discord-icon {
             width: 20px;
             height: 20px;
         }
@@ -1758,7 +1758,7 @@
                 transform: none;
             }
 
-            .google-auth-btn:hover {
+            .discord-auth-btn:hover {
                 transform: none;
             }
         }
@@ -2215,15 +2215,12 @@
                     <div class="auth-form">
                         <h2 class="auth-title">Вход в аккаунт</h2>
                         
-                        <!-- Google Auth Button -->
-                        <button class="google-auth-btn" onclick="googleAuth()">
-                            <svg class="google-icon" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        <!-- Discord Auth Button -->
+                        <button class="discord-auth-btn" id="discordAuthBtn">
+                            <svg class="discord-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.18.33.25c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
                             </svg>
-                            Войти через Google
+                            Войти через Discord
                         </button>
 
                         <div class="form-group">
@@ -2248,8 +2245,8 @@
                             <input type="password" class="form-input" id="regPassword" placeholder="Придумайте пароль">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input" id="regEmail" placeholder="Ваш email (необязательно)">
+                            <label class="form-label">Discord ID (необязательно)</label>
+                            <input type="text" class="form-input" id="regDiscord" placeholder="Ваш Discord ID">
                         </div>
                         <button class="btn btn-secondary" onclick="register()">Зарегистрироваться</button>
                     </div>
@@ -2358,10 +2355,10 @@
     </div>
 
     <script>
-        // Конфигурация Google OAuth
-        const GOOGLE_CLIENT_ID = '1013273075143-uf4egjb7f6g108ab4r4mg4h7n8k7d906.apps.googleusercontent.com';
-        const GOOGLE_SCOPE = 'profile email';
-        const GOOGLE_REDIRECT_URI = window.location.origin + window.location.pathname;
+        // Конфигурация Discord OAuth
+        const DISCORD_CLIENT_ID = '1428843992379949118'; // Ваш Application ID
+        const DISCORD_REDIRECT_URI = window.location.origin + window.location.pathname;
+        const DISCORD_SCOPE = 'identify email';
 
         // Система частиц
         class ParticlesSystem {
@@ -2375,7 +2372,6 @@
                 this.createParticles();
                 this.animateParticles();
                 
-                // Респавн частиц при изменении размера окна
                 window.addEventListener('resize', () => {
                     this.particles = [];
                     this.container.innerHTML = '';
@@ -2394,14 +2390,12 @@
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                // Случайные параметры
                 const size = Math.random() * 6 + 2;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
                 const duration = Math.random() * 20 + 10;
                 const delay = Math.random() * 5;
                 
-                // Случайный цвет из акцентных цветов
                 const colors = [
                     'rgba(255, 107, 107, 0.3)',
                     'rgba(78, 205, 196, 0.3)',
@@ -2411,7 +2405,6 @@
                 ];
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
-                // Применяем стили
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.background = color;
@@ -2434,15 +2427,12 @@
             animateParticles() {
                 const animate = () => {
                     this.particles.forEach(particle => {
-                        // Обновляем позицию
                         particle.x += particle.speedX;
                         particle.y += particle.speedY;
                         
-                        // Отскок от границ
                         if (particle.x <= 0 || particle.x >= 100) particle.speedX *= -1;
                         if (particle.y <= 0 || particle.y >= 100) particle.speedY *= -1;
                         
-                        // Применяем новую позицию
                         particle.element.style.left = `${particle.x}%`;
                         particle.element.style.top = `${particle.y}%`;
                     });
@@ -2467,16 +2457,16 @@
 
         menuToggle.addEventListener('click', toggleFullscreenMenu);
 
-        // Закрытие меню при клике на пункт
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                // Предотвращаем всплытие события, чтобы не открывалось соглашение
+                e.stopPropagation();
                 setTimeout(() => {
                     toggleFullscreenMenu();
                 }, 400);
             });
         });
 
-        // Закрытие меню при клике вне его
         fullscreenMenu.addEventListener('click', (e) => {
             if (e.target === fullscreenMenu) {
                 toggleFullscreenMenu();
@@ -2494,7 +2484,6 @@
             body.classList.remove('modal-open');
         }
 
-        // Новая функция для возврата в меню из модалки
         function backToMenuFromModal(modalId) {
             closeModal(modalId);
             setTimeout(() => {
@@ -2502,7 +2491,6 @@
             }, 300);
         }
 
-        // Закрытие модального окна при клике вне его
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal')) {
                 const modal = event.target;
@@ -2514,7 +2502,6 @@
             }
         });
 
-        // Закрытие модального окна по ESC
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 document.querySelectorAll('.modal.active').forEach(modal => {
@@ -2626,14 +2613,14 @@
                 {
                     username: "admin",
                     password: "admin123",
-                    email: "admin@morecraft.ru",
+                    discordId: "123456789",
                     role: "admin",
                     joinDate: "2024-01-01"
                 },
                 {
                     username: "moderator",
                     password: "mod123",
-                    email: "mod@morecraft.ru",
+                    discordId: "987654321",
                     role: "moderator",
                     joinDate: "2024-01-02"
                 }
@@ -2646,24 +2633,9 @@
                         author: "admin",
                         date: "2025-01-15",
                         content: "Приветствуем всех игроков на нашем новом форуме! Здесь вы можете общаться, задавать вопросы и делиться впечатлениями. Наш сервер продолжает развиваться, и мы рады каждому новому участнику нашего сообщества."
-                    },
-                    {
-                        id: 2,
-                        title: "Обновление сервера 1.20.4",
-                        author: "admin",
-                        date: "2025-01-16",
-                        content: "Сервер был обновлен до версии 1.20.4. Все игроки должны обновиться для подключения. Также были исправлены некоторые баги и улучшена производительность."
                     }
                 ],
-                reports: [
-                    {
-                        id: 1,
-                        title: "Жалоба на игрока Steve",
-                        author: "player123",
-                        date: "2025-01-17",
-                        content: "Игрок Steve разрушил мою постройку в локации X: 120, Z: -80. Прошу принять меры."
-                    }
-                ],
+                reports: [],
                 discussions: [
                     {
                         id: 1,
@@ -2671,13 +2643,6 @@
                         author: "admin",
                         date: "2025-01-15",
                         content: "Какие локации на сервере вам нравятся больше всего для строительства? Поделитесь своими любимыми местами!"
-                    },
-                    {
-                        id: 2,
-                        title: "Идеи для новых ивентов",
-                        author: "moderator",
-                        date: "2025-01-18",
-                        content: "Предлагайте идеи для будущих ивентов на сервере. Что бы вы хотели увидеть?"
                     }
                 ],
                 questions: [
@@ -2686,14 +2651,7 @@
                         title: "Как установить моды?",
                         author: "admin",
                         date: "2025-01-15",
-                        content: "Подробная инструкция по установке рекомендованных модов для сервера: 1. Скачайте Forge для версии 1.20.4, 2. Установите Forge, 3. Поместите моды в папку mods, 4. Запустите игру с профилем Forge."
-                    },
-                    {
-                        id: 2,
-                        title: "Проблемы с подключением",
-                        author: "newplayer",
-                        date: "2025-01-19",
-                        content: "Не могу подключиться к серверу, выдает ошибку. Что делать?"
+                        content: "Подробная инструкция по установке рекомендованных модов для сервера."
                     }
                 ]
             }
@@ -2701,6 +2659,70 @@
 
         // Текущий пользователь
         let currentUser = null;
+
+        // Discord OAuth функция
+        function discordAuth() {
+            const authUrl = new URL('https://discord.com/api/oauth2/authorize');
+            authUrl.searchParams.set('client_id', DISCORD_CLIENT_ID);
+            authUrl.searchParams.set('redirect_uri', DISCORD_REDIRECT_URI);
+            authUrl.searchParams.set('response_type', 'token');
+            authUrl.searchParams.set('scope', DISCORD_SCOPE);
+            
+            // Сохраняем текущее состояние
+            localStorage.setItem('returnTo', window.location.href);
+            
+            // Перенаправляем на Discord OAuth
+            window.location.href = authUrl.toString();
+        }
+
+        // Обработка возврата от Discord OAuth
+        function handleDiscordAuthCallback() {
+            const hash = window.location.hash.substring(1);
+            const params = new URLSearchParams(hash);
+            const accessToken = params.get('access_token');
+
+            if (accessToken) {
+                // Получаем информацию о пользователе Discord
+                fetch('https://discord.com/api/users/@me', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                })
+                .then(response => response.json())
+                .then(discordUser => {
+                    // Создаем или находим пользователя в нашей системе
+                    const user = {
+                        username: discordUser.username,
+                        discordId: discordUser.id,
+                        avatar: discordUser.avatar,
+                        role: 'user',
+                        joinDate: new Date().toISOString().split('T')[0],
+                        provider: 'discord'
+                    };
+                    
+                    // Проверяем, нет ли уже такого пользователя
+                    const existingUser = forumData.users.find(u => u.discordId === user.discordId);
+                    if (!existingUser) {
+                        forumData.users.push(user);
+                    } else {
+                        Object.assign(existingUser, user);
+                    }
+                    
+                    currentUser = existingUser || user;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    updateUI();
+                    
+                    // Очищаем URL от параметров OAuth
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    
+                    alert(`Успешный вход через Discord! Добро пожаловать, ${currentUser.username}`);
+                })
+                .catch(error => {
+                    console.error('Ошибка получения данных пользователя:', error);
+                    alert('Ошибка авторизации через Discord. Попробуйте еще раз.');
+                });
+            }
+        }
 
         // Показать/скрыть форум
         function showForum() {
@@ -2717,23 +2739,17 @@
 
         // Переключение вкладок форума
         function switchForumTab(tabName) {
-            // Скрыть все вкладки
             document.querySelectorAll('.forum-content').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Убрать активный класс со всех кнопок
             document.querySelectorAll('.forum-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Показать выбранную вкладку
             document.getElementById(tabName + 'Tab').classList.add('active');
-            
-            // Добавить активный класс к нажатой кнопке
             event.target.classList.add('active');
             
-            // Загрузить данные для вкладки
             if (tabName !== 'auth') {
                 loadThreadsByType(tabName);
             }
@@ -2818,72 +2834,6 @@
             body.classList.remove('modal-open');
         }
 
-        // Google Auth функция
-        function googleAuth() {
-            const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
-            authUrl.searchParams.set('client_id', GOOGLE_CLIENT_ID);
-            authUrl.searchParams.set('redirect_uri', GOOGLE_REDIRECT_URI);
-            authUrl.searchParams.set('response_type', 'token');
-            authUrl.searchParams.set('scope', GOOGLE_SCOPE);
-            authUrl.searchParams.set('state', 'google_auth');
-            
-            // Сохраняем текущее состояние для возврата
-            localStorage.setItem('returnTo', window.location.href);
-            
-            // Перенаправляем на страницу авторизации Google
-            window.location.href = authUrl.toString();
-        }
-
-        // Обработка возврата от Google OAuth
-        function handleGoogleAuthCallback() {
-            const hash = window.location.hash.substring(1);
-            const params = new URLSearchParams(hash);
-            const accessToken = params.get('access_token');
-            const state = params.get('state');
-
-            if (accessToken && state === 'google_auth') {
-                // Получаем информацию о пользователе
-                fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                })
-                .then(response => response.json())
-                .then(googleUser => {
-                    // Создаем или находим пользователя в нашей системе
-                    const user = {
-                        username: googleUser.name || `google_user_${googleUser.id.substring(0, 8)}`,
-                        email: googleUser.email,
-                        role: 'user',
-                        joinDate: new Date().toISOString().split('T')[0],
-                        provider: 'google',
-                        googleId: googleUser.id
-                    };
-                    
-                    // Проверяем, нет ли уже такого пользователя
-                    const existingUser = forumData.users.find(u => u.email === user.email);
-                    if (!existingUser) {
-                        forumData.users.push(user);
-                    } else {
-                        Object.assign(existingUser, user);
-                    }
-                    
-                    currentUser = existingUser || user;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    updateUI();
-                    
-                    // Очищаем URL от параметров OAuth
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                    
-                    alert(`Успешный вход через Google! Добро пожаловать, ${currentUser.username}`);
-                })
-                .catch(error => {
-                    console.error('Ошибка получения данных пользователя:', error);
-                    alert('Ошибка авторизации через Google. Попробуйте еще раз.');
-                });
-            }
-        }
-
         // Функции авторизации
         function login() {
             const username = document.getElementById('loginUsername').value;
@@ -2902,7 +2852,6 @@
                 updateUI();
                 alert(`Добро пожаловать, ${username}!`);
                 
-                // Очистка полей
                 document.getElementById('loginUsername').value = '';
                 document.getElementById('loginPassword').value = '';
             } else {
@@ -2913,7 +2862,7 @@
         function register() {
             const username = document.getElementById('regUsername').value;
             const password = document.getElementById('regPassword').value;
-            const email = document.getElementById('regEmail').value;
+            const discordId = document.getElementById('regDiscord').value;
 
             if (!username || !password) {
                 alert('Заполните обязательные поля!');
@@ -2928,7 +2877,7 @@
             const newUser = {
                 username: username,
                 password: password,
-                email: email || '',
+                discordId: discordId || '',
                 role: 'user',
                 joinDate: new Date().toISOString().split('T')[0]
             };
@@ -2936,10 +2885,9 @@
             forumData.users.push(newUser);
             alert('Регистрация успешна! Теперь вы можете войти.');
             
-            // Очистка полей
             document.getElementById('regUsername').value = '';
             document.getElementById('regPassword').value = '';
-            document.getElementById('regEmail').value = '';
+            document.getElementById('regDiscord').value = '';
         }
 
         function logout() {
@@ -2990,7 +2938,6 @@
                 adminPanel.style.display = 'none';
             }
             
-            // Перезагружаем все списки тем
             loadThreads();
         }
 
@@ -3031,7 +2978,7 @@
         // Админ-функции
         function manageUsers() {
             const userList = forumData.users.map(user => 
-                `${user.username} (${user.role}) - ${user.email || 'нет email'}`
+                `${user.username} (${user.role}) - Discord: ${user.discordId || 'не указан'}`
             ).join('\n');
             
             alert(`Список пользователей:\n\n${userList}\n\nВсего пользователей: ${forumData.users.length}`);
@@ -3050,9 +2997,16 @@
             new ServerOnlineWidget();
             checkLoginStatus();
             
+            // Добавляем обработчик для кнопки Discord
+            document.getElementById('discordAuthBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                discordAuth();
+            });
+            
             // Проверяем наличие OAuth callback
             if (window.location.hash.includes('access_token')) {
-                handleGoogleAuthCallback();
+                handleDiscordAuthCallback();
             }
         });
 
@@ -3069,7 +3023,6 @@
 
         // Оптимизация для мобильных устройств
         if (window.innerWidth <= 768) {
-            // Отключаем сложные анимации на мобильных
             document.documentElement.style.setProperty('--transition-slow', '0.4s ease');
             document.documentElement.style.setProperty('--transition-medium', '0.3s ease');
             document.documentElement.style.setProperty('--transition-fast', '0.2s ease');
